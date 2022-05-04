@@ -13,13 +13,14 @@ namespace WM_ControlSystem.MVVM.ViewModels
         {
             MachineModel = new Models.WashingMachine();
             WindowTitle = Title;
-            TempItems = new ObservableCollection<string>(new List<string>() { "a", "b", "c" });
+            TempItems = new ObservableCollection<string>(new List<string>(
+                Enum.GetValues(typeof(Models.ETemperature)).Cast<int>().Select(x => (x * 10).ToString() + " ℃")));
             SelectedTemp = 0;
         }
         public Models.WashingMachine MachineModel;
 
         public string WindowTitle { get; set; }
-
+        
         public ObservableCollection<string> TempItems { get; set; }
         public int SelectedTemp { get; set; }
     }
