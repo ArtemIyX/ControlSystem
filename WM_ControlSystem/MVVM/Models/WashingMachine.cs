@@ -25,7 +25,7 @@ namespace WM_ControlSystem.MVVM.Models
         Nine = 9,
         Ten = 10
     }
-    internal class WashingMachine
+    public class WashingMachine
     {
         public WashingMachine()
         {

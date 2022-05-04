@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MVVM\Models\WashingMachine.cs" />
+    <Compile Include="MVVM\ViewModels\MainVM.cs" />
     <Compile Include="MVVM_Core\Command.cs" />
     <Compile Include="MVVM_Core\LambdaCommand.cs" />
     <Compile Include="MVVM_Core\ViewModel.cs" />
@@ -99,7 +100,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="MVVM\ViewModels\" />
     <Folder Include="MVVM\Views\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

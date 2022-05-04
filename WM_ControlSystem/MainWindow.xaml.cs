@@ -23,6 +23,7 @@ namespace WM_ControlSystem
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new MVVM.ViewModels.MainVM("Washing machine control system");
         }
     }
 }

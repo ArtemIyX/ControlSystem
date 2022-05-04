@@ -3,10 +3,18 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WM_ControlSystem"
+        xmlns:local="clr-namespace:WM_ControlSystem" 
+        xmlns:viewmodels="clr-namespace:WM_ControlSystem.MVVM.ViewModels"
+        d:DataContext="{d:DesignInstance Type=viewmodels:MainVM}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="{Binding WindowTitle}" Height="500" Width="700" ResizeMode="NoResize">
     <Grid>
-        
+        <Grid.RowDefinitions>
+
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="5" MinWidth="100">
+            <ComboBox ItemsSource="{Binding TempItems}" SelectedIndex="{Binding SelectedTemp}">
+            </ComboBox>
+        </StackPanel>
     </Grid>
 </Window>
