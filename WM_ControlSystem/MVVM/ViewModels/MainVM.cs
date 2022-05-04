@@ -46,7 +46,7 @@ namespace WM_ControlSystem.MVVM.ViewModels
 
             dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
-            dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 250);
 
         }
 
@@ -114,19 +114,19 @@ namespace WM_ControlSystem.MVVM.ViewModels
         void SetPowderColor(bool red) => PowderState = new SolidColorBrush(GetColor(red));
         void SetMachineColor(bool red) => MachineState = new SolidColorBrush(GetColor(red));
 
-        private bool CanPutClothes(object param) => !MachineModel.Turned;
+        private bool CanPutClothes(object param) => !MachineModel.Turned && !MachineModel.Clothes;
         private void PutClothes(object param)
         {
             MachineModel.Clothes = true;
             SetClothesColor(false);
         }
-        private bool CanPutPowder(object param) => !MachineModel.Turned;
+        private bool CanPutPowder(object param) => !MachineModel.Turned && !MachineModel.Powder;
         private void PutPowder(object param)
         {
             MachineModel.Powder = true;
             SetPowderColor(false);
         }
-        private bool CanStart(object param) => MachineModel.Clothes && MachineModel.Powder;
+        private bool CanStart(object param) => MachineModel.Clothes && MachineModel.Powder && !MachineModel.Turned;
         private void StartMachine(object param)
         {
             if (CanStart(param))
@@ -148,11 +148,13 @@ namespace WM_ControlSystem.MVVM.ViewModels
                 ProgressBarValue = 0.0;
 
                 MachineModel.Turned = false;
+                MachineModel.Powder = false;
+                MachineModel.Clothes = false;
                 ParamsEnabled = true;
                 SetMachineColor(true);
                 SetClothesColor(true);
                 SetPowderColor(true);
-                MessageBox.Show("washing completed");
+                MessageBox.Show("Washing completed");
             }
         }
 
