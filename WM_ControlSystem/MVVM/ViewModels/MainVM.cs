@@ -16,25 +16,53 @@ namespace WM_ControlSystem.MVVM.ViewModels
             TempItems = new ObservableCollection<string>(new List<string>(
                 Enum.GetValues(typeof(Models.ETemperature)).Cast<int>().Select(x => (x * 10).ToString() + " ℃")
                 ));
-            SelectedTemp = 0;
             PowerItems = new ObservableCollection<string>(new List<string>(
                 Enum.GetValues(typeof(Models.EPower)).Cast<int>().Select(x => (x * 100).ToString())
                 ));
             ModeItems = new ObservableCollection<string>(new List<string>(
                 Enum.GetNames(typeof(Models.EMode))
                 ));
+            SelectedTemp = 0;
+            SelectedPower = 0;
+            SelectedMode = 0;
+
+
         }
         public Models.WashingMachine MachineModel;
 
         public string WindowTitle { get; set; }
-        
+
         public ObservableCollection<string> TempItems { get; set; }
-        public int SelectedTemp { get; set; }
+        private int _selectedTemp;
+        public int SelectedTemp { get => _selectedTemp; set => Set(ref _selectedTemp, value); }
 
         public ObservableCollection<string> PowerItems { get; set; }
-        public int SelectedPower { get; set; }
+        private int _selectedPower;
+        public int SelectedPower { get => _selectedPower; set => Set(ref _selectedPower, value); }
 
         public ObservableCollection<string> ModeItems { get; set; }
-        public int SelectedMode { get; set; }
+        private int _selectedMode;
+        public int SelectedMode
+        {
+            get
+            {
+                return _selectedMode;
+            }
+            set
+            {
+                Set(ref _selectedMode, value);
+
+                Models.ETemperature needTemp = Models.WashingMachine.GetTemperatureForMode((Models.EMode)(_selectedMode));
+                RecomendTemp = ((int)(needTemp) * 10).ToString() + " ℃";
+
+                Models.EPower needPower = Models.WashingMachine.GetPowerForMode((Models.EMode)(_selectedMode));
+                RecomendPower = ((int)(needPower) * 100).ToString();
+            }
+        }
+        private string _recomendTemp;
+        public string RecomendTemp { get => _recomendTemp; set => Set(ref _recomendTemp, value); }
+
+        private string _recomendPower;
+        public string RecomendPower { get => _recomendPower; set => Set(ref _recomendPower, value); }
     }
 }

@@ -12,12 +12,30 @@
         <Grid.RowDefinitions>
 
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="5" MinWidth="100">
-            <TextBlock Text="Temperature ℃" HorizontalAlignment="Center"/>
-            <ComboBox ItemsSource="{Binding TempItems}" SelectedIndex="{Binding SelectedTemp}" Margin="5"/>
-            <TextBlock Text="Power" HorizontalAlignment="Center"/>
-            <ComboBox ItemsSource="{Binding PowerItems}" SelectedIndex="{Binding SelectedPower}" Margin="5"/>
-            <TextBlock Text="Mode" HorizontalAlignment="Center"/>
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="5" MinWidth="300">
+
+            <TextBlock Text="Temperature ℃" HorizontalAlignment="Left" Margin="5, 0, 0, 0"/>
+            <StackPanel Orientation="Horizontal">
+                <ComboBox ItemsSource="{Binding TempItems}" SelectedIndex="{Binding SelectedTemp}" Margin="5" Width="65"/>
+                <Border Background="NavajoWhite" VerticalAlignment="Center" Margin="2" CornerRadius ="5">
+                    <TextBlock Text="Recomended:" VerticalAlignment="Center" Margin="2"/>
+                </Border>
+                <Border Background="Black" VerticalAlignment="Center" CornerRadius="10"  Width="45">
+                    <TextBlock Text="{Binding RecomendTemp}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" Margin="2"/>
+                </Border>
+            </StackPanel>
+            <TextBlock Text="Power" HorizontalAlignment="Left" Margin="5, 0, 0, 0"/>
+            <StackPanel Orientation="Horizontal" >
+                <ComboBox ItemsSource="{Binding PowerItems}" SelectedIndex="{Binding SelectedPower}" Margin="5" Width="65"/>
+                <Border Background="NavajoWhite" VerticalAlignment="Center" Margin="2" CornerRadius="5">
+                    <TextBlock Text="Recomended:" VerticalAlignment="Center" Margin="2"/>
+                </Border>
+                <Border Background="Black" VerticalAlignment="Center" CornerRadius="7" Width="45" HorizontalAlignment="Right">
+                    <TextBlock Text="{Binding RecomendPower}"  HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" Margin="2"/>
+                </Border>
+            </StackPanel>
+
+            <TextBlock Text="Mode" HorizontalAlignment="Left" Margin="5, 0, 0, 0"/>
             <ComboBox ItemsSource="{Binding ModeItems}" SelectedIndex="{Binding SelectedMode}" Margin="5"/>
         </StackPanel>
     </Grid>
