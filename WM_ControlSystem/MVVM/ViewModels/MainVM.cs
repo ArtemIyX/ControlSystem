@@ -30,9 +30,12 @@ namespace WM_ControlSystem.MVVM.ViewModels
             SelectedPower = 0;
             SelectedMode = 0;
 
-            ClothesState = new SolidColorBrush(Color.FromRgb(255, 0, 0));
-            PowderState = new SolidColorBrush(Color.FromRgb(255, 0, 0));
-            MachineStatus = new SolidColorBrush(Color.FromRgb(255, 0, 0)); 
+            //ClothesState = new SolidColorBrush(Color.FromRgb(255, 0, 0));
+            SetClothesColor(true);
+            //PowderState = new SolidColorBrush(Color.FromRgb(255, 0, 0));
+            SetPowderColor(true);
+            //MachineState = new SolidColorBrush(Color.FromRgb(255, 0, 0));
+            SetMachineColor(true);
 
             PutClothesCommand = new LambdaCommand(PutClothes, CanPutClothes);
         }
@@ -79,16 +82,30 @@ namespace WM_ControlSystem.MVVM.ViewModels
         private Brush _powderState;
         public Brush PowderState { get => _powderState; set => Set(ref _powderState, value); }
 
-        private Brush _machineStatus;
-        public Brush MachineStatus { get => _machineStatus; set => Set(ref _machineStatus, value); }
+        private Brush _machineState;
+        public Brush MachineState { get => _machineState; set => Set(ref _machineState, value); }
 
         public LambdaCommand PutClothesCommand { get; set; }
+
+        Color GetColor(bool red) => Color.FromRgb((byte)(red ? 255 : 0), (byte)(red ? 0 : 255), 0);
+        void SetClothesColor(bool red) => ClothesState = new SolidColorBrush(GetColor(red));
+        void SetPowderColor(bool red) => PowderState = new SolidColorBrush(GetColor(red));
+        void SetMachineColor(bool red) => MachineState = new SolidColorBrush(GetColor(red));
+
 
         private bool CanPutClothes(object param) => true;
         private void PutClothes(object param)
         {
-            MessageBox.Show("gg");
+            MachineModel.Clothes = true;
+            ClothesState = new SolidColorBrush(Color.FromRgb(0, 255, 0));
         }
+        private bool CanPutPowder(object param) => true;
+        private void PutPowder(object param)
+        {
+            MachineModel.Powder = true;
+            SetClothesColor(true);
+        }
+
 
 
     }
