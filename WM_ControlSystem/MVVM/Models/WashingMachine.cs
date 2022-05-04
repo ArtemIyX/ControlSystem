@@ -25,6 +25,14 @@ namespace WM_ControlSystem.MVVM.Models
         Nine = 9,
         Ten = 10
     }
+    public enum EMode
+    {
+        Cotton,
+        Synthetics,
+        Wool,
+        Quick,
+        KidsClothes
+    }
     public class WashingMachine
     {
         public WashingMachine()
@@ -34,6 +42,31 @@ namespace WM_ControlSystem.MVVM.Models
             _turned = false;
             _clothes = false;
             _powder = false;
+        }
+
+        public static ETemperature GetTemperatureForMode(EMode mode)
+        {
+            switch (mode)
+            {
+                case EMode.Cotton: return ETemperature.Ninety;
+                case EMode.Synthetics: return ETemperature.Forty;
+                case EMode.Wool: return ETemperature.Forty;
+                case EMode.Quick: return ETemperature.Thirty;
+                case EMode.KidsClothes: return ETemperature.Ninety;
+            }
+            return ETemperature.Fifty;
+        }
+        public static EPower GetPowerForMode(EMode mode)
+        {
+            switch (mode)
+            {
+                case EMode.Cotton: return EPower.Ten;
+                case EMode.Synthetics: return EPower.Eight;
+                case EMode.Wool: return EPower.Seven;
+                case EMode.Quick: return EPower.Ten;
+                case EMode.KidsClothes: return EPower.Five;
+            }
+            return EPower.Five;
         }
 
         private ETemperature _currentTemperature;
