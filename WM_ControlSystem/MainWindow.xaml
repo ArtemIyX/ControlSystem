@@ -17,6 +17,8 @@
             <ComboBox ItemsSource="{Binding TempItems}" SelectedIndex="{Binding SelectedTemp}" Margin="5"/>
             <TextBlock Text="Power" HorizontalAlignment="Center"/>
             <ComboBox ItemsSource="{Binding PowerItems}" SelectedIndex="{Binding SelectedPower}" Margin="5"/>
+            <TextBlock Text="Mode" HorizontalAlignment="Center"/>
+            <ComboBox ItemsSource="{Binding ModeItems}" SelectedIndex="{Binding SelectedMode}" Margin="5"/>
         </StackPanel>
     </Grid>
 </Window>

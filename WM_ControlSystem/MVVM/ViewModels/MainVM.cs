@@ -20,6 +20,9 @@ namespace WM_ControlSystem.MVVM.ViewModels
             PowerItems = new ObservableCollection<string>(new List<string>(
                 Enum.GetValues(typeof(Models.EPower)).Cast<int>().Select(x => (x * 100).ToString())
                 ));
+            ModeItems = new ObservableCollection<string>(new List<string>(
+                Enum.GetNames(typeof(Models.EMode))
+                ));
         }
         public Models.WashingMachine MachineModel;
 
@@ -30,5 +33,8 @@ namespace WM_ControlSystem.MVVM.ViewModels
 
         public ObservableCollection<string> PowerItems { get; set; }
         public int SelectedPower { get; set; }
+
+        public ObservableCollection<string> ModeItems { get; set; }
+        public int SelectedMode { get; set; }
     }
 }
