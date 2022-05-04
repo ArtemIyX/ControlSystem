@@ -13,8 +13,10 @@
 
         </Grid.RowDefinitions>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="5" MinWidth="100">
-            <ComboBox ItemsSource="{Binding TempItems}" SelectedIndex="{Binding SelectedTemp}">
-            </ComboBox>
+            <TextBlock Text="Temperature ℃" HorizontalAlignment="Center"/>
+            <ComboBox ItemsSource="{Binding TempItems}" SelectedIndex="{Binding SelectedTemp}" Margin="5"/>
+            <TextBlock Text="Power" HorizontalAlignment="Center"/>
+            <ComboBox ItemsSource="{Binding PowerItems}" SelectedIndex="{Binding SelectedPower}" Margin="5"/>
         </StackPanel>
     </Grid>
 </Window>
