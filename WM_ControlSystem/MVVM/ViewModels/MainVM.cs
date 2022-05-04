@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
-
+using System.Windows.Threading;
 namespace WM_ControlSystem.MVVM.ViewModels
 {
     public class MainVM : MVVMCore.ViewModel
@@ -42,7 +42,16 @@ namespace WM_ControlSystem.MVVM.ViewModels
             StartCommand = new LambdaCommand(StartMachine, CanStart);
 
             ParamsEnabled = true;
+            ProgressBarValue = 0.0;
+
+            dispatcherTimer = new DispatcherTimer();
+            dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+
         }
+
+        private DispatcherTimer dispatcherTimer;
+
         public Models.WashingMachine MachineModel;
 
         public string WindowTitle { get; set; }
@@ -92,6 +101,10 @@ namespace WM_ControlSystem.MVVM.ViewModels
         private Brush _machineState;
         public Brush MachineState { get => _machineState; set => Set(ref _machineState, value); }
 
+        private double _progressBarValue;
+        public double ProgressBarValue { get => _progressBarValue; set => Set(ref _progressBarValue, value); }
+
+
         public LambdaCommand PutClothesCommand { get; set; }
         public LambdaCommand PutPowderCommand { get; set; }
         public LambdaCommand StartCommand { get; set; }
@@ -121,9 +134,27 @@ namespace WM_ControlSystem.MVVM.ViewModels
                 MachineModel.Turned = true;
                 SetMachineColor(false);
                 ParamsEnabled = false;
+                ProgressBarValue += 10.0;
+                dispatcherTimer.Start();
             }
         }
 
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            ProgressBarValue += 10.0;
+            if(ProgressBarValue >= 100.0)
+            {
+                dispatcherTimer.Stop();
+                ProgressBarValue = 0.0;
+
+                MachineModel.Turned = false;
+                ParamsEnabled = true;
+                SetMachineColor(true);
+                SetClothesColor(true);
+                SetPowderColor(true);
+                MessageBox.Show("washing completed");
+            }
+        }
 
     }
 }
