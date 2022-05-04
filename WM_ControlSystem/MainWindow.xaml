@@ -15,8 +15,11 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
 
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Center"  MinWidth="300" Margin="10">
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center"  MinWidth="300" Margin="24,10,23,10">
 
             <TextBlock Text="Temperature ℃" HorizontalAlignment="Left" Margin="5, 0, 0, 0"/>
             <StackPanel Orientation="Horizontal">
@@ -68,5 +71,16 @@
                 <TextBlock Text="On/Off" VerticalAlignment="Center" Margin="5"/>
             </StackPanel>
         </StackPanel>
+        <Border Grid.Row="1" Grid.Column="1"             
+                Margin="5"
+                Background="Black">
+            <ProgressBar 
+                     Minimum="0" Maximum="100" Value="50" BorderThickness="0" 
+                        Margin="2"
+                     Background="AliceBlue"
+                     Foreground="SkyBlue">
+
+            </ProgressBar>
+        </Border>
     </Grid>
 </Window>
