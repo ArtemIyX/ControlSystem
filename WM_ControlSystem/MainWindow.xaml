@@ -20,7 +20,8 @@
 
             <TextBlock Text="Temperature ℃" HorizontalAlignment="Left" Margin="5, 0, 0, 0"/>
             <StackPanel Orientation="Horizontal">
-                <ComboBox ItemsSource="{Binding TempItems}" SelectedIndex="{Binding SelectedTemp}" Margin="5" Width="65"/>
+                <ComboBox ItemsSource="{Binding TempItems}" SelectedIndex="{Binding SelectedTemp}" Margin="5" Width="65"
+                          IsEnabled="{Binding ParamsEnabled}"/>
                 <Border Background="NavajoWhite" VerticalAlignment="Center" Margin="2" CornerRadius ="5">
                     <TextBlock Text="Recomended:" VerticalAlignment="Center" Margin="2"/>
                 </Border>
@@ -30,7 +31,8 @@
             </StackPanel>
             <TextBlock Text="Power" HorizontalAlignment="Left" Margin="5, 0, 0, 0"/>
             <StackPanel Orientation="Horizontal" >
-                <ComboBox ItemsSource="{Binding PowerItems}" SelectedIndex="{Binding SelectedPower}" Margin="5" Width="65"/>
+                <ComboBox ItemsSource="{Binding PowerItems}" SelectedIndex="{Binding SelectedPower}" Margin="5" Width="65"
+                          IsEnabled="{Binding ParamsEnabled}"/>
                 <Border Background="NavajoWhite" VerticalAlignment="Center" Margin="2" CornerRadius="5">
                     <TextBlock Text="Recomended:" VerticalAlignment="Center" Margin="2"/>
                 </Border>
@@ -40,14 +42,15 @@
             </StackPanel>
 
             <TextBlock Text="Mode" HorizontalAlignment="Left" Margin="5, 0, 0, 0"/>
-            <ComboBox ItemsSource="{Binding ModeItems}" SelectedIndex="{Binding SelectedMode}" Margin="5"/>
+            <ComboBox ItemsSource="{Binding ModeItems}" SelectedIndex="{Binding SelectedMode}" Margin="5" 
+                IsEnabled="{Binding ParamsEnabled}"/>
             <Button HorizontalAlignment="Left" Margin="5" Width="100" Command="{Binding PutClothesCommand}">
                 <TextBlock Text="Put clothes" Margin="5"/>
             </Button>
-            <Button HorizontalAlignment="Left" Margin="5" Width="100">
+            <Button HorizontalAlignment="Left" Margin="5" Width="100" Command="{Binding PutPowderCommand}">
                 <TextBlock Text="Put powder" Margin="5"/>
             </Button>
-            <Button HorizontalAlignment="Left" Margin="5" Width="100">
+            <Button HorizontalAlignment="Left" Margin="5" Width="100" Command="{Binding StartCommand}">
                 <TextBlock Text="Start" Margin="5"/>
             </Button>
         </StackPanel>
@@ -61,7 +64,7 @@
                 <TextBlock Text="Powder" VerticalAlignment="Center" Margin="5"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="5">
-                <Border Width="30" Height="30" BorderThickness="2" BorderBrush="Black" CornerRadius="25" Background="{Binding MachineStatus}"/>
+                <Border Width="30" Height="30" BorderThickness="2" BorderBrush="Black" CornerRadius="25" Background="{Binding MachineState}"/>
                 <TextBlock Text="On/Off" VerticalAlignment="Center" Margin="5"/>
             </StackPanel>
         </StackPanel>

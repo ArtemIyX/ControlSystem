@@ -38,6 +38,10 @@ namespace WM_ControlSystem.MVVM.ViewModels
             SetMachineColor(true);
 
             PutClothesCommand = new LambdaCommand(PutClothes, CanPutClothes);
+            PutPowderCommand = new LambdaCommand(PutPowder, CanPutPowder);
+            StartCommand = new LambdaCommand(StartMachine, CanStart);
+
+            ParamsEnabled = true;
         }
         public Models.WashingMachine MachineModel;
 
@@ -70,6 +74,9 @@ namespace WM_ControlSystem.MVVM.ViewModels
                 RecomendPower = ((int)(needPower) * 100).ToString();
             }
         }
+        private bool _paramsEnabled;
+        public bool ParamsEnabled { get => _paramsEnabled; set => Set(ref _paramsEnabled, value); }
+
         private string _recomendTemp;
         public string RecomendTemp { get => _recomendTemp; set => Set(ref _recomendTemp, value); }
 
@@ -86,26 +93,36 @@ namespace WM_ControlSystem.MVVM.ViewModels
         public Brush MachineState { get => _machineState; set => Set(ref _machineState, value); }
 
         public LambdaCommand PutClothesCommand { get; set; }
+        public LambdaCommand PutPowderCommand { get; set; }
+        public LambdaCommand StartCommand { get; set; }
 
         Color GetColor(bool red) => Color.FromRgb((byte)(red ? 255 : 0), (byte)(red ? 0 : 255), 0);
         void SetClothesColor(bool red) => ClothesState = new SolidColorBrush(GetColor(red));
         void SetPowderColor(bool red) => PowderState = new SolidColorBrush(GetColor(red));
         void SetMachineColor(bool red) => MachineState = new SolidColorBrush(GetColor(red));
 
-
-        private bool CanPutClothes(object param) => true;
+        private bool CanPutClothes(object param) => !MachineModel.Turned;
         private void PutClothes(object param)
         {
             MachineModel.Clothes = true;
-            ClothesState = new SolidColorBrush(Color.FromRgb(0, 255, 0));
+            SetClothesColor(false);
         }
-        private bool CanPutPowder(object param) => true;
+        private bool CanPutPowder(object param) => !MachineModel.Turned;
         private void PutPowder(object param)
         {
             MachineModel.Powder = true;
-            SetClothesColor(true);
+            SetPowderColor(false);
         }
-
+        private bool CanStart(object param) => MachineModel.Clothes && MachineModel.Powder;
+        private void StartMachine(object param)
+        {
+            if (CanStart(param))
+            {
+                MachineModel.Turned = true;
+                SetMachineColor(false);
+                ParamsEnabled = false;
+            }
+        }
 
 
     }
