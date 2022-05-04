@@ -9,10 +9,14 @@
         mc:Ignorable="d"
         Title="{Binding WindowTitle}" Height="500" Width="700" ResizeMode="NoResize">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150*"/>
+            <ColumnDefinition Width="150*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
 
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="5" MinWidth="300">
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center"  MinWidth="300" Margin="10">
 
             <TextBlock Text="Temperature ℃" HorizontalAlignment="Left" Margin="5, 0, 0, 0"/>
             <StackPanel Orientation="Horizontal">
@@ -37,6 +41,29 @@
 
             <TextBlock Text="Mode" HorizontalAlignment="Left" Margin="5, 0, 0, 0"/>
             <ComboBox ItemsSource="{Binding ModeItems}" SelectedIndex="{Binding SelectedMode}" Margin="5"/>
+            <Button HorizontalAlignment="Left" Margin="5" Width="100" Command="{Binding PutClothesCommand}">
+                <TextBlock Text="Put clothes" Margin="5"/>
+            </Button>
+            <Button HorizontalAlignment="Left" Margin="5" Width="100">
+                <TextBlock Text="Put powder" Margin="5"/>
+            </Button>
+            <Button HorizontalAlignment="Left" Margin="5" Width="100">
+                <TextBlock Text="Start" Margin="5"/>
+            </Button>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Column="1" Margin="10">
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <Border Width="30" Height="30" BorderThickness="2" BorderBrush="Black" CornerRadius="25" Background="{Binding ClothesState}"/>
+                <TextBlock Text="Clothes" VerticalAlignment="Center" Margin="5"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <Border Width="30" Height="30" BorderThickness="2" BorderBrush="Black" CornerRadius="25" Background="{Binding PowderState}"/>
+                <TextBlock Text="Powder" VerticalAlignment="Center" Margin="5"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <Border Width="30" Height="30" BorderThickness="2" BorderBrush="Black" CornerRadius="25" Background="{Binding MachineStatus}"/>
+                <TextBlock Text="On/Off" VerticalAlignment="Center" Margin="5"/>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Window>

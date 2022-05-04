@@ -1,9 +1,13 @@
-﻿using System;
+﻿using MVVMCore;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
+using System.Windows.Media;
 
 namespace WM_ControlSystem.MVVM.ViewModels
 {
@@ -26,7 +30,11 @@ namespace WM_ControlSystem.MVVM.ViewModels
             SelectedPower = 0;
             SelectedMode = 0;
 
+            ClothesState = new SolidColorBrush(Color.FromRgb(255, 0, 0));
+            PowderState = new SolidColorBrush(Color.FromRgb(255, 0, 0));
+            MachineStatus = new SolidColorBrush(Color.FromRgb(255, 0, 0)); 
 
+            PutClothesCommand = new LambdaCommand(PutClothes, CanPutClothes);
         }
         public Models.WashingMachine MachineModel;
 
@@ -64,5 +72,24 @@ namespace WM_ControlSystem.MVVM.ViewModels
 
         private string _recomendPower;
         public string RecomendPower { get => _recomendPower; set => Set(ref _recomendPower, value); }
+
+        private Brush _clothesState;
+        public Brush ClothesState { get => _clothesState; set => Set(ref _clothesState, value); }
+
+        private Brush _powderState;
+        public Brush PowderState { get => _powderState; set => Set(ref _powderState, value); }
+
+        private Brush _machineStatus;
+        public Brush MachineStatus { get => _machineStatus; set => Set(ref _machineStatus, value); }
+
+        public LambdaCommand PutClothesCommand { get; set; }
+
+        private bool CanPutClothes(object param) => true;
+        private void PutClothes(object param)
+        {
+            MessageBox.Show("gg");
+        }
+
+
     }
 }
